@@ -1,5 +1,6 @@
 package employee;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,17 +11,12 @@ public class EmployeePayrollService {
     public EmployeePayrollService(List<EmployeePayrollData> employeePayrollList){
         this.employeePayrollList = employeePayrollList;
     }
-
     public static void main(String[] args){
         ArrayList<EmployeePayrollData> employeePayrollList = new ArrayList<>();
         EmployeePayrollService employeePayRollService = new EmployeePayrollService(employeePayrollList);
         Scanner consoleInputReader = new Scanner(System.in);
         employeePayRollService.readEmployeePayrollData(consoleInputReader);
         employeePayRollService.writeEmployeePayrollData();
-    }
-
-    private void writeEmployeePayrollData() {
-        System.out.println("\nWriting Employee Payroll to Console: " +employeePayrollList);
     }
 
     private void readEmployeePayrollData(Scanner consoleInputReader) {
@@ -31,6 +27,10 @@ public class EmployeePayrollService {
         System.out.println("Enter Employee Salary");
         double salary = consoleInputReader.nextDouble();
         employeePayrollList.add(new EmployeePayrollData(id, name, salary));
+    }
+
+    private void writeEmployeePayrollData() {
+        System.out.println("\nWriting Employee Payroll to Console: " +employeePayrollList);
     }
 
 }
