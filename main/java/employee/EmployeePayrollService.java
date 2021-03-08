@@ -14,16 +14,21 @@ public class EmployeePayrollService {
         this.employeePayrollList=employeePayrollList;
     }
 
-    public void readData(){
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Enter Employee ID");
-        int empID = scan.nextInt();
-        System.out.println("Enter Employee Name");
-        String empName = scan.next();
-        System.out.println("Enter Employee Salary");
-        int empSalary = scan.nextInt();
-        EmployeePayrollData adder = new EmployeePayrollData(empID,empName,empSalary);
-        employeePayrollList.add(adder);
+    public void readData(IOService ioService){
+        if (ioService.equals(IOService.CONSOLE_IO)) {
+            Scanner scan = new Scanner(System.in);
+            System.out.println("Enter Employee Name");
+            String empName = scan.next();
+            System.out.println("Enter Employee ID");
+            int empID = scan.nextInt();
+            System.out.println("Enter Employee Salary");
+            int empSalary = scan.nextInt();
+
+            EmployeePayrollData adder = new EmployeePayrollData(empID, empName, empSalary);
+            employeePayrollList.add(adder);
+        }else if (ioService.equals(IOService.FILE_IO)){
+            new EmployeePayrollFileIOService().readData();
+        }
     }
 
     public void writeEmployeePayrollData(IOService ioService){
@@ -47,6 +52,7 @@ public class EmployeePayrollService {
     public static void main(String[] args) {
         ArrayList<EmployeePayrollData> employeePayrollList = new ArrayList<>();
         EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
+        employeePayrollService.readData(IOService.FILE_IO);
         employeePayrollService.writeEmployeePayrollData(IOService.FILE_IO);
     }
 
